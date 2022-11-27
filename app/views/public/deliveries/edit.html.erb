@@ -1,0 +1,48 @@
+<div class='container mt-5'>
+<%= flash[:notice] %>
+  <!--<div class='row'>-->
+    <!--<div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">-->
+  		<h2 class="bg-light mt-3 col-3 text-left offset-1">配送先編集</h2>
+      <%= form_with model: @delivery, url:delivery_path(@delivery.id), method: :patch do |f| %>
+
+      <div class="row mt-3">
+        <div class="form-group px-5 pb-1">
+        <!--<div class="col-md-7">-->
+          <span>郵便番号（ハイフンなし）</span>
+        </div>
+          <div class="ml-3">
+            <%#= f.text_field :zip, class: "form-control" %>
+            <%#= f.label :郵便番号 %>
+            <%= f.text_area:zip, class: 'form-control-sm delivery_zip', size: "10" %>
+          </div>
+      </div>
+
+       <div class="row mt-3">
+        <div class="form-group px-5 pd-1">
+          <span>住所</span>
+        </div>
+          <div class="offset-2">
+            <!--<div class="form-group">-->
+            <%#= f.label :住所 %>
+            <%= f.text_area:address, class: 'form-control-sm delivery_address', cols: "60" %>
+          </div>
+      </div>
+
+        <div class="row mt-3">
+          <div class="form-group px-5 pd-1">
+            <span>宛名</span>
+          </div>
+            <div class="offset-2">
+              <!--<div class="form-group">-->
+              <%#= f.label :宛名 %>
+              <%= f.text_area:name, class: 'form-control-sm delivery_name' %>
+            </div>
+        </div>
+
+        <div class="actions offset-4 py-3">
+          <%= f.submit '変更内容を保存', class:"btn btn-success" %>
+        </div>
+      <% end %>
+  	</div>
+  </div>
+</div>

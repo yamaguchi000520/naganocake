@@ -1,0 +1,19 @@
+<div class="d-flex " >
+<% products.each do |product|%>
+      <div class="card m-1" style="width: 12rem;">
+        <div class="card-body">
+          <%=link_to product_path(product.id), class: "text-dark" do %>
+           <%#= image_tag product.get_image(200,100)%>
+            <% if product.image.attached? %>
+            <%= image_tag product.image, size: "150x80" %>
+          <% else %>
+            <%= image_tag 'no_image', size: "150x80" %>
+          <% end %>
+         <p class="card-title"><%=product.name%></p>
+         <%end%>
+           ¥<%=product.price.to_s(:delimited)%>
+        </div>
+
+      </div>
+      <%end%>
+</div>

@@ -1,0 +1,46 @@
+<header class="image_tag">
+  <nav class="navbar navbar-expand-lg navbar-light">
+
+      <div class="container">
+      <%= link_to root_path do %>
+        <%= image_tag 'naganocake_logo.jpeg', size: "200x50" %>
+      <% end %>
+    <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        
+        <%# ログインに成功した場合 %>
+        <% if customer_signed_in? %>
+          <p class="text-left text-light ml-5">ようこそ、<%= current_customer.last_name %>さん！</p>
+        <% end %>
+        
+        <ul class="navbar-nav ml-auto">
+      <!--customerでログインしている時-->
+      <% if customer_signed_in? %>
+        <li><%= link_to customers_my_page_path(current_customer), class:'btn btn-outline-dark bg-warning mr-3' do %>マイページ<% end %></li>
+        <li><%= link_to products_path, class:'btn btn-outline-dark bg-warning mr-3' do %>商品一覧<% end %></li>
+        <li><%= link_to cart_items_path, class:'btn btn-outline-dark bg-warning mr-3' do %>カート<% end %></li>
+        <li><%= link_to destroy_customer_session_path, method: :delete, class:'btn btn-outline-dark bg-warning mr-3' do %>ログアウト<% end %></li>
+      <!--adminでログインしている時-->
+      <% elsif admin_signed_in? %>
+
+        <li><%= link_to admin_products_path, class:'btn btn-outline-dark bg-warning mr-3' do %>商品一覧<% end %></li>
+        <li><%= link_to admin_customers_path, class:'btn btn-outline-dark bg-warning mr-3' do %>会員一覧<% end %></li>
+        <li><%= link_to admin_path, class:'btn btn-outline-dark bg-warning mr-3' do %>注文履歴一覧<% end %></li>
+        <li><%= link_to admin_genres_path, class:'btn btn-outline-dark bg-warning mr-3' do %>ジャンル一覧<% end %></li>
+        <li><%= link_to destroy_admin_session_path, method: :delete, class:'btn btn-outline-dark bg-warning' do %>ログアウト<% end %></li>
+
+      <% else %>
+      <!--ログインしていない状態-->
+        <li><%= link_to products_path, class:'btn btn-outline-dark  bg-warning mr-3' do %>商品一覧<% end %></li>
+        <li><%= link_to about_path, class:'btn btn-outline-dark bg-warning mr-3' do %>アバウト<% end %></li>
+        <li><%= link_to new_customer_registration_path, class:'btn btn-outline-dark bg-warning mr-3' do %>新規登録<% end %></li>
+        <li><%= link_to new_customer_session_path,  class:'btn btn-outline-dark text-danger bg-warning' do %>ログイン<% end %></li>
+      <% end %>
+      </ul>
+    <!--</nav>-->
+      </div>
+    </div>
+  </nav>
+</header>

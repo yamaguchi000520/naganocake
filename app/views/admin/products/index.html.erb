@@ -1,0 +1,31 @@
+<div class="container m-5">
+  <div class="row">
+    <div class="col-8 offset-2">
+    <h2>商品一覧</h2> <div class="col-2 offset-9"><%=link_to 'New Product',new_admin_product_path%></div>
+
+    <table class="table">
+      <tr class="table-secondary">
+        <th>商品ID</th>
+        <th>商品名</th>
+        <th>税抜価格</th>
+        <th>ジャンル</th>
+        <th>ステータス</th>
+      </tr>
+      <% @products.each do |product|%>
+      <tr>
+       <td><%=product.id%></td>
+       <td ><%=link_to product.name, admin_product_path(product.id),class: "text-dark"%></td>
+       <td><%=product.price.to_s(:delimited)%></td>
+       <td><%=product.genre.name%></td>
+       <td><% if product.is_active == true %>
+        <strong class="text-success"><%='販売中' %></strong>
+            <%else%>
+        <strong class="text-secondary"><%='販売停止中' %></strong>
+        </td>
+            <%end%>
+       </tr>
+     <%end%>
+   </table>
+  </div>
+ </div>
+</div>

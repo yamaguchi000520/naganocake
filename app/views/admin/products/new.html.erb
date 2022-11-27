@@ -1,0 +1,42 @@
+<div class="container m-5">
+  <div class="row">
+      <h3>商品新規登録</h3>
+    <div class="col-8 md-8 offset-2 ">
+        
+        <%= form_with model: @product, url:admin_products_path, method: :post do |f|%>
+     <table>
+      <tr>
+        <th>商品画像</th><th><%= f.file_field :image, accept: "image/*" %></th>
+      </tr>
+      <tr>
+        <th>商品名</th>
+        <td><%= f.text_field :name, placeholder: "商品名",class:"form-label"%></td>
+      </tr>
+      <tr>
+        <th>商品説明</th>
+        <td><%= f.text_area:explanation, placeholder: "ここに説明文を記述します", rows: '5'%></td>
+      </tr>
+      <tr>
+        <th>ジャンル</th>
+        <td><%= f.collection_select(:genre_id, @genres, :id, :name, prompt: "選択してください") %></td>
+      </tr>
+      <tr>
+       <th>税抜価格</th>
+       <td><%= f.text_field:price, placeholder: "1000"%>円</td>
+      </tr>
+      <tr>
+        <th>販売ステータス</th>
+        <td><%= f.radio_button:is_active, true %>
+          <%= f.label:is_active, '販売中　', value: true %>
+          <%= f.radio_button:is_active, false%>
+          <%= f.label:is_active, '販売停止中', value: false %></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><%= f.submit'新規登録',class: 'btn btn-success' %></td>
+      </tr>
+     </table>
+     <%end%>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,17 @@
+<div class="container mt-5 mb-5">
+  <div class="row">
+     <div class="col-3"> 
+      <%=render 'genre_form',genres: @genres%>
+     </div>   
+   <!--</div>　-->
+    
+  <!--<div class="row">-->
+    <div class="col-9 ">
+      <h3 class="inline-block">商品一覧(全<%=@products.count %>件）</h3>
+      <br>
+      <%=render 'index',products: @products%>
+    </div>
+  </div>　
+     
+  
+</div>

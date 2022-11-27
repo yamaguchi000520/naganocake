@@ -1,0 +1,40 @@
+<div class="container m-5">
+  <div class="row">
+     <div class="col-md-2">
+      <%=render 'genre_form',genres: @genres%>
+     </div>
+    <!--写真に拡大機能つけてみる-->
+    <div class="col-md-4 offset-1">
+        <%#= image_tag @product.get_image(300,200)%>
+          <% if @product.image.attached? %>
+            <%= image_tag @product.image, size: "300x200" %>
+          <% else %>
+            <%= image_tag 'no_image', size: "300x200" %>
+          <% end %>
+    </div>
+    <div class="col-md-4 ">
+     
+          <h3><%= @product.name%></h3>
+          <p><%= @product.explanation%></p>
+          
+          <h4>¥<%= @product.add_tax_price.to_s(:delimited) %></h4><p>(税込)</p>
+         
+         <!--商品詳細ページでカートに入れるボタンを作りたい場面-->
+            <% if @product.is_active == true %> <!--<商品販売中の場合>-->
+              <%= form_with model: @cart_item, url: cart_items_path, method: :post do |f| %>
+               <%= f.label :product_count, "個数選択" %>
+                <%= f.select :product_count, [1,2,3,4,5,6,7,8,9,10] %>
+               <%= f.hidden_field :product_id, :value => @product.id %>
+                 <!--#第一引数にオブジェクト名item_id、第二引数部分にvalueで受け渡す値 @item.idを指定-->
+                 <!--#cartitem controllerの cart_items.find_by(item_id:に送ることができる-->
+               <%= f.submit "カートに入れる",class:"btn btn-success" %>
+               <% end %>
+               <%else%>
+               <p>販売停止中</p>
+               <%= link_to '商品一覧に戻る', products_path,class: 'btn btn-secondary' %>
+              
+            <% end %>
+      
+    </div>
+  </div>
+</div>
